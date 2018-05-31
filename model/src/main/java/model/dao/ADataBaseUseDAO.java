@@ -18,10 +18,10 @@ import model.Level;
 public abstract class ADataBaseUseDAO extends AbstractDAO {
 
 	
-	/** The SQL map by id */	
+	/** The SQL level by id */	
 	public static String sqlMapByLevel = "{call getLevel(?)}";
 
-	/** The SQL all map by id */
+	/** The SQL all level by id */
 	public static String sqlAllLevel = "{call getAllLevel()}";
 	
 	/** The SQL elements by level */
@@ -46,13 +46,13 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
     private static int    yPositionColumnIndex  = 2;
 	
 	/**
-     * Gets the map level by number.
+     * Gets the level by number.
      *
      * @param id
      *            the id of the level wished
      * @return the level by number
      */
-	public Map getLevelByNumber(int id) {
+	public Level getLevelByNumber(int id) {
         final CallableStatement callStatement = prepareCall(sqlMapByLevel);
         Level level= null;
         callStatement.setInt(1, id);
@@ -63,7 +63,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
             }
             result.close();
         }
-        feedMap(level);
+        feedLevel(level);
         return level;
         
         
@@ -76,7 +76,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
             final ResultSet result = callStatement.getResultSet();
 
             for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
-                map.addElement(result.getString(identifierColumnIndex), result.getInt(xPositonColumnIndex), result.getInt(yPositionColumnIndex));
+                level.addElement(result.getString(identifierColumnIndex), result.getInt(xPositonColumnIndex), result.getInt(yPositionColumnIndex));
             }
             result.close();
         }
