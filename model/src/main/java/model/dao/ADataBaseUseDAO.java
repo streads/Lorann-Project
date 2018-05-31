@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Map;
+import model.Level;
 
 /**
  * <h1>The Abstract Class ADataBaseUseDAO.</h1>
@@ -46,11 +46,11 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
     private static int    yPositionColumnIndex  = 2;
 	
 	/**
-     * Gets the map level by id.
+     * Gets the map level by number.
      *
      * @param id
-     *            the id of the map wished
-     * @return the map by id
+     *            the id of the level wished
+     * @return the level by number
      */
 	public Map getLevelByNumber(int id) {
         final CallableStatement callStatement = prepareCall(sqlMapByLevel);
@@ -84,9 +84,9 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 	}
 	
 	/**
-     * Gets the all maps.
+     * Gets the all levels.
      *
-     * @return all the maps in a List
+     * @return all the level in a List
      */
 	public List<Level> getAllLevel(){
 		final ArrayList<Level> level = new ArrayList<Level>();
