@@ -6,7 +6,7 @@ import view.IView;
 /**
  * <h1>The Class ControllerFacade provides a facade of the Controller component.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Lucas LUDMANN lucas.ludmann@viacesi.fr
  * @version 1.0
  */
 public class ControllerFacade implements IController, Runnable {
@@ -59,6 +59,12 @@ public class ControllerFacade implements IController, Runnable {
 
 	@Override
 	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void orderPerformer(EUserOrder userOrder) {
 		// TODO Auto-generated method stub
 		
 	}

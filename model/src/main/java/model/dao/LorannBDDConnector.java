@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,23 +8,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * <h1>The Class BoulderDashBDDConnector.</h1>
+ * <h1>The Class LorannBDDConnector.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
+ * @author Hugo RIVAT hugo.rivat@viacesi.fr
  */
+
 final class LorannBDDConnector {
 
     /** The instance. */
     private static LorannBDDConnector instance;
 
-    /** The login. */
+    /** The login (username). */
     private static String                  user     = "root";
 
     /** The password. */
-    private static String                  password = "";
+    private static String                  password = "sheepy";
 
-    /** The url. */
+    /** The url of the DataBase. */
     private static String                  url      = "jdbc:mysql://localhost/lorann?useSSL=false&serverTimezone=UTC";
 
     /** The connection. */
@@ -33,16 +34,16 @@ final class LorannBDDConnector {
     private Statement                      statement;
 
     /**
-     * Instantiates a new boulder dash BDD connector.
+     * Instantiates a new Lorann BDD connector.
      */
     private LorannBDDConnector() {
         this.open();
     }
 
     /**
-     * Gets the single instance of BoulderDashBDDConnector.
+     * Gets the single instance of LorannBDDConnector.
      *
-     * @return single instance of BoulderDashBDDConnector
+     * @return single instance of LorannBDDConnector
      */
     public static LorannBDDConnector getInstance() {
         if (instance == null) {
@@ -79,7 +80,7 @@ final class LorannBDDConnector {
     }
 
     /**
-     * Execute query.
+     * Execute query in the DB .
      *
      * @param query
      *            the query
@@ -95,13 +96,13 @@ final class LorannBDDConnector {
     }
 
     /**
-     * Prepare call.
+     * Prepare call on the DB.
      *
      * @param query
      *            the query
      * @return the java.sql. callable statement
      */
-    public java.sql.CallableStatement prepareCall(final String query) {
+    public CallableStatement prepareCall(final String query) {
         try {
             return this.getConnection().prepareCall(query);
         } catch (final SQLException e) {
