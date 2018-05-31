@@ -1,7 +1,7 @@
 /**
  * Provides all contracts for the model component.
  * 
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Lucas LUDMANN lucas.ludmann@viacesi.fr
  * @version 1.0
  */
 package model;

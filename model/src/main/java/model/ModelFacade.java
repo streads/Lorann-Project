@@ -2,10 +2,9 @@ package model;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.sql.SQLException;
-import java.util.List;
 
-import model.dao.ExampleDAO;
+import controller.EUserOrder;
+
 
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
@@ -45,5 +44,7 @@ public final class ModelFacade implements IModel {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
