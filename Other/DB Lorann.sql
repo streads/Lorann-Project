@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 31 Mai 2018 à 15:14
+-- Généré le :  Jeu 31 Mai 2018 à 20:08
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -24,24 +24,24 @@ DELIMITER $$
 --
 -- Procédures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllMap` ()  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllLevel` ()  NO SQL
 BEGIN
 SELECT name,height,width 
-FROM map;
+FROM level;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getElement` (IN `map_level` INT)  NO SQL
 BEGIN
 SELECT identifier, positionX, positionY
 FROM contenir
-WHERE level = map_level;
+WHERE levelNumber = map_level;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getMap` (IN `desired_map` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getLevel` (IN `desired_map` INT)  NO SQL
 BEGIN
 SELECT name,height,width 
-FROM map
-WHERE level = desired_map;
+FROM level
+WHERE number = desired_map;
 END$$
 
 DELIMITER ;
@@ -54,7 +54,7 @@ DELIMITER ;
 
 CREATE TABLE `contenir` (
   `id` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
+  `levelNumber` int(11) NOT NULL,
   `identifier` char(5) NOT NULL,
   `positionX` int(11) DEFAULT NULL,
   `positionY` int(11) DEFAULT NULL
@@ -64,7 +64,7 @@ CREATE TABLE `contenir` (
 -- Contenu de la table `contenir`
 --
 
-INSERT INTO `contenir` (`id`, `level`, `identifier`, `positionX`, `positionY`) VALUES
+INSERT INTO `contenir` (`id`, `levelNumber`, `identifier`, `positionX`, `positionY`) VALUES
 (1, 1, 'L', 5, 6),
 (2, 2, 'C', 0, 0);
 
@@ -100,21 +100,21 @@ INSERT INTO `element` (`identifier`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `map`
+-- Structure de la table `level`
 --
 
-CREATE TABLE `map` (
-  `level` int(11) NOT NULL,
+CREATE TABLE `level` (
+  `number` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `height` int(255) DEFAULT NULL,
   `width` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `map`
+-- Contenu de la table `level`
 --
 
-INSERT INTO `map` (`level`, `name`, `height`, `width`) VALUES
+INSERT INTO `level` (`number`, `name`, `height`, `width`) VALUES
 (1, 'Exia', 12, 20),
 (2, 'Home', 12, 20);
 
@@ -127,7 +127,7 @@ INSERT INTO `map` (`level`, `name`, `height`, `width`) VALUES
 --
 ALTER TABLE `contenir`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Level` (`level`),
+  ADD KEY `Level` (`levelNumber`),
   ADD KEY `Identifier` (`identifier`);
 
 --
@@ -137,10 +137,10 @@ ALTER TABLE `element`
   ADD PRIMARY KEY (`identifier`);
 
 --
--- Index pour la table `map`
+-- Index pour la table `level`
 --
-ALTER TABLE `map`
-  ADD PRIMARY KEY (`level`);
+ALTER TABLE `level`
+  ADD PRIMARY KEY (`number`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -152,10 +152,10 @@ ALTER TABLE `map`
 ALTER TABLE `contenir`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `map`
+-- AUTO_INCREMENT pour la table `level`
 --
-ALTER TABLE `map`
-  MODIFY `level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `level`
+  MODIFY `number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
@@ -165,7 +165,7 @@ ALTER TABLE `map`
 --
 ALTER TABLE `contenir`
   ADD CONSTRAINT `identifierfk` FOREIGN KEY (`identifier`) REFERENCES `element` (`identifier`),
-  ADD CONSTRAINT `levelfk` FOREIGN KEY (`level`) REFERENCES `map` (`level`);
+  ADD CONSTRAINT `levelfk` FOREIGN KEY (`levelNumber`) REFERENCES `map` (`numero`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

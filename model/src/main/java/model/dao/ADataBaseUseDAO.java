@@ -19,10 +19,10 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 
 	
 	/** The SQL map by id */	
-	public static String sqlMapByLevel = "{call getMap(?)}";
+	public static String sqlMapByLevel = "{call getLevel(?)}";
 
 	/** The SQL all map by id */
-	public static String sqlAllMap = "{call getAllMap()}";
+	public static String sqlAllLevel = "{call getAllLevel()}";
 	
 	/** The SQL elements by level */
 	public static String sqlElementsByLevel = "{call getElement(?)}";
@@ -52,26 +52,26 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
      *            the id of the map wished
      * @return the map by id
      */
-	public Map getMapByLevel(int id) {
+	public Map getLevelByNumber(int id) {
         final CallableStatement callStatement = prepareCall(sqlMapByLevel);
-        Map map = null;
+        Level level= null;
         callStatement.setInt(1, id);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
             if (result.first()) {
-                map = new Map(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex));
+                level = new Level(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex));
             }
             result.close();
         }
-        feedMap(map);
-        return map;
+        feedMap(level);
+        return level;
         
         
         return null;
 	}
 	
-	public void feedMap(Map map) {
-        final CallableStatement callStatement = prepareCall(sqlAllMap);
+	public void feedLevel(Level level) {
+        final CallableStatement callStatement = prepareCall(sqlAllLevel);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
@@ -88,18 +88,18 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
      *
      * @return all the maps in a List
      */
-	public List<Map> getAllMap(){
-		final ArrayList<Map> map = new ArrayList<Map>();
-        final CallableStatement callStatement = prepareCall(sqlAllMap);
+	public List<Level> getAllLevel(){
+		final ArrayList<Level> level = new ArrayList<Level>();
+        final CallableStatement callStatement = prepareCall(sqlAllLevel);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
             for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
-                map.add(new Map(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex)));
+                level.add(new Level(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex)));
             }
             result.close();
         }
-        return map;
+        return level;
 		return null;
 	}
 
