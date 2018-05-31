@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -25,5 +27,29 @@ public class ViewFacade implements IView {
     public final void displayMessage(final String message) {
         JOptionPane.showMessageDialog(null, message);
     }
+
+	@Override
+	public void createUI(int height, int width) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setScore(int score) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setLevelName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void refreshModelData(List<List<String>> sprites) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
