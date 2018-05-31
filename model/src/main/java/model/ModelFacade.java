@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Dimension;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,31 +22,28 @@ public final class ModelFacade implements IModel {
         super();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getExampleById(int)
-     */
-    @Override
-    public Example getExampleById(final int id) throws SQLException {
-        return ExampleDAO.getExampleById(id);
-    }
+	@Override
+	public Image getSpriteElement(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getExampleByName(java.lang.String)
-     */
-    @Override
-    public Example getExampleByName(final String name) throws SQLException {
-        return ExampleDAO.getExampleByName(name);
-    }
+	@Override
+	public Dimension getMapSize(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getAllExamples()
-     */
-    @Override
-    public List<Example> getAllExamples() throws SQLException {
-        return ExampleDAO.getAllExamples();
-    }
+	@Override
+	public void loadMap(int indice) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveEntities(EUserOrder loranDirection) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
