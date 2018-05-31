@@ -52,7 +52,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
      *            the id of the level wished
      * @return the level by number
      */
-	public Level getLevelByNumber(int id) {
+	public static Level getLevelByNumber(int id) {
         final CallableStatement callStatement = prepareCall(sqlMapByLevel);
         Level level= null;
         callStatement.setInt(1, id);
@@ -66,12 +66,11 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
         feedLevel(level);
         return level;
         
-        
-        return null;
 	}
 	
-	public void feedLevel(Level level) {
+	public static void feedLevel(Level level) {
         final CallableStatement callStatement = prepareCall(sqlAllLevel);
+        callStatement.setInt(1, level.getId());
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
@@ -88,7 +87,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
      *
      * @return all the level in a List
      */
-	public List<Level> getAllLevel(){
+	public static List<Level> getAllLevel(){
 		final ArrayList<Level> level = new ArrayList<Level>();
         final CallableStatement callStatement = prepareCall(sqlAllLevel);
         if (callStatement.execute()) {
@@ -100,9 +99,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
             result.close();
         }
         return level;
-		return null;
 	}
 
 	
-
 }
