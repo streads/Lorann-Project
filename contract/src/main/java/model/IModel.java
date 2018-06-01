@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import controller.EUserOrder;
+import controller.IController;
 
 /**
  * <h1>The Interface IModel.</h1>
@@ -13,6 +14,11 @@ import controller.EUserOrder;
  */
 public interface IModel {
 	
+    /**
+     * Set the value of the controller inside the Model
+     */
+    public void setController(IController controller);
+    
 	/**
 	 * retrieves a sprite from an element at a certain position x or y
 	 * @param x
