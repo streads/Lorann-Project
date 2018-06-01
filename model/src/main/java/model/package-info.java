@@ -1,7 +1,7 @@
 /**
  * Provides all classes for the controller component.
  * 
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Thibault HANNA thibault.hanna@viacesi.fr
  * @version 1.0
  */
 package model;

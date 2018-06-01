@@ -12,5 +12,6 @@ public enum EUserOrder {
 	LEFT,
 	TOP,
 	BOTTOM,
-	NOP
+	NOP,
+	SPELLCAST
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.sql.SQLException;
 
 import controller.EUserOrder;
 
@@ -23,25 +24,26 @@ public interface IModel {
 	public Image getSpriteElement(int x, int y);
 	
 	/**
-	 * get the size of the map
+	 * get the size of the level
 	 * @return 
 	 *     dimension of the window
 	 */	
-     public Dimension getMapSize(int x, int y);
+     public Dimension getLevelDimension();
      
      /**
  	 * allows to load the environment
  	 * @param indice 
  	 *     indice is the level ID   
+     * @throws SQLException 
  	 */	
-     public void loadMap ( int indice); 
+     public void loadLevel ( int indice) throws SQLException; 
      
      /**
   	 * execute the moving algorithm of element
   	 * @param indice 
-  	 *     loranDirection the direction of lorann  
+  	 *     playerDirection the direction wished by player  
   	 */
-     public void moveEntities(EUserOrder lorannDirection);
+     public void moveEntities(EUserOrder playerDirection);
      
      
      

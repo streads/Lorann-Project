@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Map;
+import model.Level;
 
 /**
  * <h1>The Abstract Class ADataBaseUseDAO.</h1>
@@ -18,11 +18,11 @@ import model.Map;
 public abstract class ADataBaseUseDAO extends AbstractDAO {
 
 	
-	/** The SQL map by id */	
-	public static String sqlMapByLevel = "{call getMap(?)}";
+	/** The SQL level by id */	
+	public static String sqlMapByLevel = "{call getLevel(?)}";
 
-	/** The SQL all map by id */
-	public static String sqlAllMap = "{call getAllMap()}";
+	/** The SQL all level by id */
+	public static String sqlAllLevel = "{call getAllLevel()}";
 	
 	/** The SQL elements by level */
 	public static String sqlElementsByLevel = "{call getElement(?)}";
@@ -46,37 +46,35 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
     private static int    yPositionColumnIndex  = 2;
 	
 	/**
-     * Gets the map level by id.
+     * Gets the level by number.
      *
      * @param id
-     *            the id of the map wished
-     * @return the map by id
+     *            the id of the level wished
+     * @return the level by number
+	 * @throws SQLException 
      */
-	public Map getMapByLevel(int id) {
+	public static Level getLevelByNumber(int id) throws SQLException {
         final CallableStatement callStatement = prepareCall(sqlMapByLevel);
-        Map map = null;
+        Level level= null;
         callStatement.setInt(1, id);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
             if (result.first()) {
-                map = new Map(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex));
+                level = new Level(id, result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex));
             }
             result.close();
         }
-        feedMap(map);
-        return map;
-        
-        
-        return null;
+        feedLevel(level);
+        return level;
 	}
 	
-	public void feedMap(Map map) {
-        final CallableStatement callStatement = prepareCall(sqlAllMap);
+	public static void feedLevel(Level level) throws SQLException {
+        final CallableStatement callStatement = prepareCall(sqlAllLevel);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
             for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
-                map.addElement(result.getString(identifierColumnIndex), result.getInt(xPositonColumnIndex), result.getInt(yPositionColumnIndex));
+                level.addElement(result.getString(identifierColumnIndex), result.getInt(xPositonColumnIndex), result.getInt(yPositionColumnIndex));
             }
             result.close();
         }
@@ -84,25 +82,22 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 	}
 	
 	/**
-     * Gets the all maps.
+     * Gets the all levels.
      *
-     * @return all the maps in a List
+     * @return all the level in a List
+	 * @throws SQLException 
      */
-	public List<Map> getAllMap(){
-		final ArrayList<Map> map = new ArrayList<Map>();
-        final CallableStatement callStatement = prepareCall(sqlAllMap);
+	public static List<Level> getAllLevel() throws SQLException{
+		final ArrayList<Level> level = new ArrayList<Level>();
+        final CallableStatement callStatement = prepareCall(sqlAllLevel);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
             for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
-                map.add(new Map(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex)));
+                level.add(new Level(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex)));
             }
             result.close();
         }
-        return map;
-		return null;
+        return level;
 	}
-
-	
-
 }
