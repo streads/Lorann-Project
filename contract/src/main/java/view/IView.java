@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Image;
 import java.util.List;
 
 import controller.IController;
@@ -50,10 +51,10 @@ public interface IView {
 	
 	/**
 	 * Refreshes the window
-	 * @param sprites
+	 * @param imgs
 	 *     An array of images to disp on the window
 	 */
-	public void refreshModelData(List<String> sprites);
+	public void refreshModelData(List<Image> imgs);
 	
 	    
 
