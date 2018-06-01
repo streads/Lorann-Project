@@ -10,12 +10,15 @@ import view.IView;
  * @version 1.0
  */
 public class ControllerFacade implements IController, Runnable {
-
+	
+	private static final int LEVEL_NUMBER = 1;
     /** The view. */
     private final IView  view;
 
     /** The model. */
     private final IModel model;
+    
+    private EUserOrder nextOrder; /** ordre de déplacement pour le model stockée/** 
 
     /**
      * Instantiates a new controller facade.
@@ -29,16 +32,33 @@ public class ControllerFacade implements IController, Runnable {
         super();
         this.view = view;
         this.model = model;
+        this.getView().setController(this);
+        this.getModel().setController(this);
+     
     }
 
     /**
      * Start.
      */
     public void start() {
-    	this.getView().displayMessage("Ok");
+    	   
+        this.getView().displayMessage("WELCOME TO THE CRYPT");
+    	this.getModel().loadMap(LEVEL_NUMBER);
+    	this.getView().createUI(this.getModel().getLevelDimension().height, this.getModel().getLevelDimension().width);
+        this.start();
     	
+    	this.run();
+ 
     }
-
+    private void sendSpritToView() {
+		for (int x = 0; x < this.getModel().getLevelDimension().height; x++) {
+    		for (int y = 0; y < this.getModel().getLevelDimension().width; y++) {
+    	    	this.getView().refreshModelData(this.getModel().getSpriteElement(x, y));
+    			
+    		}
+			
+		}
+    }
     /**
      * Gets the view.
      *
@@ -59,13 +79,35 @@ public class ControllerFacade implements IController, Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+    	for( ;; ) {
+    		sendSpritToView();
+    		this.getModel().moveEntities(nextOrder); // on récupere l'ordre de déplacement 
+    		nextOrder = EUserOrder.NOP; // Permet de dire que l'ordre à été effectuer 
+    		try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+    		
+    	}
 	}
 
 	@Override
+	/**	on passe au controleur l'ordre que nous envoie la vue 
+	*/
 	public void orderPerformer(EUserOrder userOrder) {
-		// TODO Auto-generated method stub
+		nextOrder = userOrder;
+		
 		
 	}
 }
+
+
+
+
+
+
+
+
+
