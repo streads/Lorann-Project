@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.sql.SQLException;
 
 import controller.EUserOrder;
+import controller.IController;
 import model.dao.ADataBaseUseDAO;
 
 
@@ -73,6 +74,12 @@ public final class ModelFacade implements IModel {
 	
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+
+	@Override
+	public void setController(IController controller) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
