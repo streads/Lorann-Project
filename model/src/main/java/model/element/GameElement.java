@@ -7,7 +7,7 @@ import java.util.List;
 import model.Level;
 
 public class GameElement {
-	protected int state = 1;
+	protected int state = 0;
 	protected String identifier;
 	protected EPermeability permeability = EPermeability.ALLOW_NOBODY;
 	protected Level level;
@@ -90,6 +90,10 @@ public class GameElement {
 	
 	public Level getLevel() {
 		return this.level;
+	}
+	
+	public String getIdentifier() {
+		return this.identifier;
 	}
 }
 

@@ -69,13 +69,8 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
         return level;
 	}
 	
-	public static void feedLevel(Level level) throws SQLException {
-        final CallableStatement callStatement = prepareCall(sqlAllLevel);
 
-        
-	}
-	
-	public static void feedLevel(Level level) {
+	public static void feedLevel(Level level) throws SQLException {
         final CallableStatement callStatement = prepareCall(sqlAllLevel);
         callStatement.setInt(1, level.getId());
         if (callStatement.execute()) {

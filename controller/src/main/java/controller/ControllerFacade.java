@@ -1,5 +1,10 @@
 package controller;
 
+import java.awt.Image;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.IModel;
 import view.IView;
 
@@ -43,21 +48,26 @@ public class ControllerFacade implements IController, Runnable {
     public void start() {
     	   
         this.getView().displayMessage("WELCOME TO THE CRYPT");
-    	this.getModel().loadMap(LEVEL_NUMBER);
-    	this.getView().createUI(this.getModel().getLevelDimension().height, this.getModel().getLevelDimension().width);
-        this.start();
+    	try {
+			this.getModel().loadLevel(LEVEL_NUMBER);
+			this.getView().createUI(this.getModel().getLevelDimension().height, this.getModel().getLevelDimension().width);
+			this.start();
+	    	this.run();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
-    	this.run();
  
     }
     private void sendSpritToView() {
+    	List<Image> imgs = new ArrayList<Image>();
 		for (int x = 0; x < this.getModel().getLevelDimension().height; x++) {
     		for (int y = 0; y < this.getModel().getLevelDimension().width; y++) {
-    	    	this.getView().refreshModelData(this.getModel().getSpriteElement(x, y));
-    			
+    			imgs.add(this.getModel().getSpriteElement(x, y));    			
     		}
-			
 		}
+		this.getView().refreshModelData(imgs);
     }
     /**
      * Gets the view.
