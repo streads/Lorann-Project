@@ -6,7 +6,10 @@ import org.junit.Test;
 
 public class ADataBaseUseDAOTest {
 
-	
+	/**
+     * Test the method getLevelByNumber. 
+     * Just verify in the first level (the test level) in the DB if the Height of the Level is equals to 12 and the Width to 20
+     */
 	@Test
 	public void testGetLevelByNumber() {
 		Level level1 = ADataBaseUseDAO.getLevelByNumber(1);
@@ -15,6 +18,10 @@ public class ADataBaseUseDAOTest {
 	}
 
 	
+	/**
+     * Test the method feedLevel. 
+     * Just verify if the method return the good composition of the first level in the DB (The test level) 
+     */
 	@Test
 	public void testFeedLevel() {
 		Level level1 = ADataBaseUseDAO.getLevelByNumber(1);
@@ -25,6 +32,10 @@ public class ADataBaseUseDAOTest {
 	}
 
 	
+	/**
+     * Test the method getAllLevel. 
+     * Just verify if the method return the good properties of the first level (in the first index of the list)
+     */
 	@Test
 	public void testGetAllLevel() {
 		List<Level> levels = ADataBaseUseDAO.getAllLevel();
