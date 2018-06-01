@@ -9,9 +9,10 @@ public class TestViewFacade {
 	@Test
 	public void test_createUI(){
 		ViewFacade test = new ViewFacade();
-        test.createUI(500, 500);
-        assertEquals("Not good height", 500, test.getFrame().getHeight());
-        assertEquals("Not good width", 500, test.getFrame().getWidth());
+        test.createUI(500, 499);
+        assertEquals("Not the good height", 500, test.getFrame().getHeight());
+        assertEquals("Not the good width", 499, test.getFrame().getWidth());
+
 	}
 	
 //	@Test

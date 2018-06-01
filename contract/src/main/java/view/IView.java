@@ -51,11 +51,10 @@ public interface IView {
 	/**
 	 * Refreshes the window
 	 * @param elm
-	 *     An array of images to disp on the window
+	 *     An array of element tag to disp on the window
 	 */
 	public void refreshModelData(List<String> elementsTag);
-	
-	    
+
 
 
 }
