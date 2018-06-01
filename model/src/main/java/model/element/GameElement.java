@@ -91,5 +91,9 @@ public class GameElement {
 	public Level getLevel() {
 		return this.level;
 	}
+	
+	public String getIdentifier() {
+		return this.identifier;
+	}
 }
 
