@@ -18,6 +18,7 @@ public class Frame extends BoardFrame implements KeyListener {
 	public Frame(String title, IController controller)
 	{
 		super(title);
+		
 		this.controller = controller;
 	}
 
@@ -58,6 +59,4 @@ public class Frame extends BoardFrame implements KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-
 }
