@@ -2,14 +2,16 @@ package model;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.sql.SQLException;
 
 import controller.EUserOrder;
+import model.dao.ADataBaseUseDAO;
 
 
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Thibault HANNA thibault.hanna@viacesi.fr
  * @version 1.0
  */
 public final class ModelFacade implements IModel {
@@ -17,33 +19,62 @@ public final class ModelFacade implements IModel {
     /**
      * Instantiates a new model facade.
      */
+	protected Level level = null;
+	
     public ModelFacade() {
         super();
     }
 
 	@Override
 	public Image getSpriteElement(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimension getMapSize(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void loadMap(int indice) {
-		// TODO Auto-generated method stub
+		if (level != null) {
+			if (level.getElement(x, y) != null) {
+				return level.getElement(x, y).getImage();	
+			}else {
+				return null;
+			}
+		}else {
+			System.err.println("level not loaded");
+			return null;
+		}
 		
 	}
 
 	@Override
-	public void moveEntities(EUserOrder loranDirection) {
+	public Dimension getLevelDimension() {
 		// TODO Auto-generated method stub
+		if (level != null) {
+			return new Dimension(this.getLevel().height, this.getLevel().width);
+		}else {
+			System.err.println("Level not loaded");
+			return null;
+		}
+	}
+	@Override
+	public void loadLevel(int indice) throws SQLException {
+		this.setLevel(ADataBaseUseDAO.getLevelByNumber(indice));
+	}
+
+	@Override
+	public void moveEntities(EUserOrder playerDirection) {
+		if (level != null) {
+			level.tick();
+			
+		}else {
+			System.err.println("Level not loaded");
+		}
+		
 		
 	}
+	
+	public Level getLevel() {
+		return this.level;
+	}
+	
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
 
 
 
