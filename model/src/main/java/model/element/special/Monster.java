@@ -1,19 +1,16 @@
 package model.element.special;
 
-import java.awt.Image;
-import java.util.List;
-
 import model.element.GameElement;
 
 public class Monster extends GameElement{
 
-	public Monster(String identifier, List<Image> sprites) {
-		super(identifier, sprites);
+	public Monster(String identifier) {
+		super(identifier);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Monster(String identifier, Image sprite) {
-		super(identifier, sprite);
+	public Monster(String identifier, int state) {
+		super(identifier, state);
 		// TODO Auto-generated constructor stub
 	}
 

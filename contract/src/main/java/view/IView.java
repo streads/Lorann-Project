@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Image;
 import java.util.List;
 
 import controller.IController;
@@ -51,10 +50,10 @@ public interface IView {
 	
 	/**
 	 * Refreshes the window
-	 * @param imgs
+	 * @param elm
 	 *     An array of images to disp on the window
 	 */
-	public void refreshModelData(List<Image> imgs);
+	public void refreshModelData(List<String> elementsTag);
 	
 	    
 

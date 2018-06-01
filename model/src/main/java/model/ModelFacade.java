@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.sql.SQLException;
 
 import controller.EUserOrder;
@@ -27,10 +26,10 @@ public final class ModelFacade implements IModel {
     }
 
 	@Override
-	public Image getSpriteElement(int x, int y) {
+	public String getTagElement(int x, int y) {
 		if (level != null) {
 			if (level.getElement(x, y) != null) {
-				return level.getElement(x, y).getImage();	
+				return level.getElement(x, y).getTag();	
 			}else {
 				return null;
 			}

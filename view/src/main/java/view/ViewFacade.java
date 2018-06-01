@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Image;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -69,9 +68,11 @@ public class ViewFacade implements IView {
 		// TODO Auto-generated method stub
 		
 	}
-
+	int i = 0;
 	@Override
-	public void refreshModelData(List<Image> sprites) {
+	public void refreshModelData(List<String> elementsTags) {
+		System.err.println(i + ": received " + elementsTags.size() + " objects from controller");
+		i+=1;
 		/*int elements = 0;
         for (int y = 0; y < sprites.size() / width; y++ ) {
 			for(int x = 0; x < width; x++) {

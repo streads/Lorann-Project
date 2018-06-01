@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.sql.SQLException;
 
 import controller.EUserOrder;
@@ -27,7 +26,7 @@ public interface IModel {
 	 * @param y 
 	 *     position in orderly of an element
 	 */	
-	public Image getSpriteElement(int x, int y);
+	public String getTagElement(int x, int y);
 	
 	/**
 	 * get the size of the level

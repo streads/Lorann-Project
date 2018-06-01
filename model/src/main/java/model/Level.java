@@ -11,8 +11,9 @@ import model.element.special.Player;
 public class Level {
 	protected int id, height, width;
 	protected List<GameElement> gameElements;
+	protected GameElement lorann = null;
 	protected String name;
-	protected int score;
+	protected int score = 0;
 	protected EUserOrder playerAction;
 	
 	public Level(int id, String name, int height, int width) {
@@ -102,13 +103,51 @@ public class Level {
 		case "1":
 			temp = GameElementFactory.createMonster1();
 			break;
-
+		case "2":
+			temp = GameElementFactory.createMonster2();
+			break;
+		case "3":
+			temp = GameElementFactory.createMonster3();
+			break;
+		case "4":
+			temp = GameElementFactory.createMonster4();
+			break;
+		case "B":
+			temp = GameElementFactory.createCrystalBall();
+			break;
+		case "C":
+			temp = GameElementFactory.createClosedDoor();
+			break;
+		case "L":
+			lorann = null;
+			temp = GameElementFactory.createLorann();
+			lorann = (Player) temp;
+			break;
+		case "O":
+			temp = GameElementFactory.createOpenedDoor();
+			break;
+		case "P":
+			temp = GameElementFactory.createPurse();
+			break;
+		case "-":
+			temp = GameElementFactory.createVerticalBone();
+			break;
+		case "|":
+			temp = GameElementFactory.createHorizontalBone();
+			break;	
+		case "/":
+			temp = GameElementFactory.createBone();
+			break;
+		
 		default:
 			break;
 		}
 		
 		if (temp != null) {
 			temp.setPostion(x, y);
+			temp.setLevel(this);
+			gameElements.add(temp);
+			
 		}else {
 			System.err.println("Identifier not recognize");
 		}

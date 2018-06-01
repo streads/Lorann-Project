@@ -10,6 +10,10 @@ import showboard.BoardFrame;
 public class Frame extends BoardFrame implements KeyListener {
 	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Access point to the controller
      */
 	private IController controller;

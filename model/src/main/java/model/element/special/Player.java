@@ -1,16 +1,13 @@
 package model.element.special;
 
-import java.awt.Image;
-import java.util.List;
-
 import controller.EUserOrder;
 import model.element.GameElement;
 import model.element.OnTickStrategy;
 
 public class Player extends GameElement {
 
-	public Player(String identifier, List<Image> sprites) {
-		super(identifier, sprites);
+	public Player(String identifier) {
+		super(identifier);
 		this.tickManager = new OnTickStrategy() {
 			
 			@Override

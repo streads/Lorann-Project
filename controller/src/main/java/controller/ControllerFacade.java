@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,6 @@ public class ControllerFacade implements IController, Runnable {
     	try {
 			this.getModel().loadLevel(LEVEL_NUMBER);
 			this.getView().createUI(this.getModel().getLevelDimension().height, this.getModel().getLevelDimension().width);
-			this.start();
 	    	this.run();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -61,13 +59,13 @@ public class ControllerFacade implements IController, Runnable {
  
     }
     private void sendSpritToView() {
-    	List<Image> imgs = new ArrayList<Image>();
+    	List<String> elm = new ArrayList<String>();
 		for (int x = 0; x < this.getModel().getLevelDimension().height; x++) {
     		for (int y = 0; y < this.getModel().getLevelDimension().width; y++) {
-    			imgs.add(this.getModel().getSpriteElement(x, y));    			
+    			elm.add(this.getModel().getTagElement(x, y)); 
     		}
 		}
-		this.getView().refreshModelData(imgs);
+		this.getView().refreshModelData(elm);
     }
     /**
      * Gets the view.

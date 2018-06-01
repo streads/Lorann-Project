@@ -1,32 +1,24 @@
 package model.element;
 
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Level;
 
 public class GameElement {
-	protected int state = 1;
+	protected int state = 0;
 	protected String identifier;
 	protected EPermeability permeability = EPermeability.ALLOW_NOBODY;
 	protected Level level;
 	protected int x, y; 
-	protected List<Image> sprites = null;
 	protected OnCollisionStrategy colliderManager = null;
 	protected OnTickStrategy tickManager = null;
 	
-	public GameElement(char identifier) {
-		
+	
+	public GameElement(String identifier) {
+		this.identifier = identifier;
 	}
 	
-	public GameElement(String identifier ,List<Image> sprites) {
-		this.sprites = sprites;
-	}
-	
-	public GameElement(String identifier, Image sprite) {
-		this.sprites = new ArrayList<Image>();
-		this.sprites.add(sprite);
+	public GameElement(String identifier, int state) {
+		this.identifier = identifier;
+		this.state = state;
 	}
 	
 	public void SetColliderManager(OnCollisionStrategy colliderManager) {
@@ -63,13 +55,16 @@ public class GameElement {
 	public int getState() {
 		return this.state;
 	}
+	public void setPermeability(EPermeability perm) {
+		this.permeability = perm;
+	}
 	
-	public Image getImage() {
-		if (state >= this.sprites.size()) {
-			return this.sprites.get(0);
-		}else {
-			return this.sprites.get(state);
-		}
+	public EPermeability getPermeability() {
+		return this.permeability;
+	}
+	
+	public String getTag() {
+		return identifier + "-" + state;
 	}
 	
 	

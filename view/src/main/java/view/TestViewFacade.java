@@ -10,8 +10,8 @@ public class TestViewFacade {
 	public void test_createUI(){
 		ViewFacade test = new ViewFacade();
         test.createUI(500, 500);
-        assertEquals(500, test.getFrame().getHeight());
-        assertEquals(500, test.getFrame().getWidth());
+        assertEquals("Not good height", 500, test.getFrame().getHeight());
+        assertEquals("Not good width", 500, test.getFrame().getWidth());
 	}
 	
 //	@Test
@@ -30,7 +30,7 @@ public class TestViewFacade {
 
 	@Test
 	public void test_refreshModeData(){
-		ViewFacade test = new ViewFacade();
+		//ViewFacade test = new ViewFacade();
         //test.refreshModelData();
         //assertEquals(, test.getSprites());
         fail("Not implemented");

@@ -28,22 +28,22 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 	public static String sqlElementsByLevel = "{call getElement(?)}";
 	
 	 /** The id column index. */
-    private static int    nameColumnIndex    = 0;
+    private static int    nameColumnIndex    = 1;
 
     /** The name column index. */
-    private static int    heightColumnIndex  = 1;
+    private static int    heightColumnIndex  = 2;
     
     /** The name column index. */
-    private static int    widthColumnIndex  = 2;
+    private static int    widthColumnIndex  = 3;
 	
     /** The name column index. */
-    private static int    identifierColumnIndex  = 0;
+    private static int    identifierColumnIndex  = 1;
 	
     /** The name column index. */
-    private static int    xPositonColumnIndex  = 1;
+    private static int    xPositonColumnIndex  = 2;
 	
     /** The name column index. */
-    private static int    yPositionColumnIndex  = 2;
+    private static int    yPositionColumnIndex  = 3;
 	
 	/**
      * Gets the level by number.
@@ -71,7 +71,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 	
 
 	public static void feedLevel(Level level) throws SQLException {
-        final CallableStatement callStatement = prepareCall(sqlAllLevel);
+        final CallableStatement callStatement = prepareCall(sqlElementsByLevel);
         callStatement.setInt(1, level.getId());
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
