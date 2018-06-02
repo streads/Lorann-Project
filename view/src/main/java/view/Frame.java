@@ -1,14 +1,14 @@
 package view;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JFrame;
+
 import controller.EUserOrder;
 import controller.IController;
-import showboard.BoardFrame;
 
-public class Frame extends BoardFrame implements KeyListener {
+public class Frame extends JFrame implements KeyListener {
 	
 
 	/**

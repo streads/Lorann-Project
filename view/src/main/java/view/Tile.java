@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import showboard.ISquare;
@@ -52,7 +51,7 @@ public class Tile implements ISquare {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public final void loadImage() throws IOException {
-        this.setImage(ImageIO.read(new File("images/" + this.getImageName())));
+        this.setImage(ImageIO.read(this.getClass().getResource("/images/" + this.getImageName() + ".png")));
     }
 
     /**
@@ -69,7 +68,7 @@ public class Tile implements ISquare {
      *
      * @return the image name
      */
-    private String getImageName() {
+    public String getImageName() {
         return this.imageName;
     }
 
