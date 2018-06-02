@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,10 +10,11 @@ import showboard.BoardFrame;
 
 public class Frame extends BoardFrame implements KeyListener {
 	
-    /**
+
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4694925017397478123L;
 	/**
      * Access point to the controller
      */
@@ -22,7 +24,6 @@ public class Frame extends BoardFrame implements KeyListener {
 	public Frame(String title, IController controller)
 	{
 		super(title);
-		
 		this.controller = controller;
 	}
 

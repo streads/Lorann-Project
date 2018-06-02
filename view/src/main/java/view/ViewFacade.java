@@ -1,7 +1,8 @@
 package view;
 
-import java.util.List;
-
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import controller.IController;
@@ -15,6 +16,8 @@ import controller.IController;
 
 public class ViewFacade implements IView {
 	
+	private final Tile x = new Tile("BlackTile.jpg");
+	private int tileRow, tileColumn;
     /**
      * Initiates a window
      */
@@ -32,6 +35,10 @@ public class ViewFacade implements IView {
         super();
     }
     
+    
+    public Dimension getDimension() {
+    	return new Dimension(tileRow, tileColumn);
+    }
     /**
      * Set the value of the controller inside the View
      */
@@ -52,9 +59,37 @@ public class ViewFacade implements IView {
     }
 
 	@Override
-	public void createUI(int height, int width) {
-		frame = new Frame("Loop view", controller);
-		
+	public void createUI(int tileRow, int tileColumn) {
+		frame = new Frame("TESTING", controller);
+	
+
+	       
+	    frame.setDimension(new Dimension(20, 20));
+	    frame.setDisplayFrame(new Rectangle(0,0, 200,  200));
+	    frame.setSize(200, 200 );
+	   
+	    
+	    
+	    try {
+			x.loadImage();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    
+	    for (int i = 0; i < 20; i++) {
+	            for (int j = 0; j < 20; j++) {
+	            	
+	            	System.out.println(frame.getTitle());
+	            	frame.addSquare(x, i, j);
+	            }
+	           
+	    }
+	    
+
+	     frame.setVisible(true);
+	   
+	       
 	}
 
 	@Override
@@ -69,18 +104,22 @@ public class ViewFacade implements IView {
 		
 	}
 	int i = 0;
+	
+	/* (non-Javadoc)
+	 * @see view.IView#refreshModelData(java.util.List)
+	 */
 	@Override
-	public void refreshModelData(List<String> elementsTags) {
-		System.err.println(i + ": received " + elementsTags.size() + " objects from controller");
-		i+=1;
-		/*int elements = 0;
-        for (int y = 0; y < sprites.size() / width; y++ ) {
-			for(int x = 0; x < width; x++) {
-				String spriteLocation = sprites.get(elements) + " " + String.valueOf(x) + ";" + String.valueOf(y);
-                displayMessage(spriteLocation);
-                elements++;    
+	public void refreshModelData(String[][] elementsTags) {
+		//System.err.println(i + ": received " + elementsTags.length + " columns of elements from controller");
+		
+		for (int x = 0; x < this.getDimension().width; x++) {
+			for (int y = 0; y < this.getDimension().height; y++) {
+				String elem = elementsTags[x][y];
+				if (elem != null) {
+					System.out.println(x + ";" + y + ";" + elem);
+				}
 			}
-		}*/
+		}
 	}
 	
 	public Frame getFrame() {

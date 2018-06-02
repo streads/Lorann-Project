@@ -49,7 +49,7 @@ public class ControllerFacade implements IController, Runnable {
         this.getView().displayMessage("WELCOME TO THE CRYPT");
     	try {
 			this.getModel().loadLevel(LEVEL_NUMBER);
-			this.getView().createUI(this.getModel().getLevelDimension().height, this.getModel().getLevelDimension().width);
+			this.getView().createUI(this.getModel().getLevelDimension().width, this.getModel().getLevelDimension().height);
 	    	this.run();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -59,13 +59,14 @@ public class ControllerFacade implements IController, Runnable {
  
     }
     private void sendSpritToView() {
-    	List<String> elm = new ArrayList<String>();
+    	String[][] elms =  new String[this.getModel().getLevelDimension().height][this.getModel().getLevelDimension().width];
+    	
 		for (int x = 0; x < this.getModel().getLevelDimension().height; x++) {
     		for (int y = 0; y < this.getModel().getLevelDimension().width; y++) {
-    			elm.add(this.getModel().getTagElement(x, y)); 
+    			elms[x][y] = this.getModel().getTagElement(x, y); 
     		}
 		}
-		this.getView().refreshModelData(elm);
+		this.getView().refreshModelData(elms);
     }
     /**
      * Gets the view.

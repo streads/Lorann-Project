@@ -53,7 +53,7 @@ public interface IView {
 	 * @param elm
 	 *     An array of element tag to disp on the window
 	 */
-	public void refreshModelData(List<String> elementsTag);
+	public void refreshModelData(String[][] elementTags);
 
 
 

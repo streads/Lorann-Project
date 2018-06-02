@@ -44,7 +44,7 @@ public final class ModelFacade implements IModel {
 	public Dimension getLevelDimension() {
 		// TODO Auto-generated method stub
 		if (level != null) {
-			return new Dimension(this.getLevel().height, this.getLevel().width);
+			return new Dimension(this.getLevel().getWidth(), this.getLevel().getHeight());
 		}else {
 			System.err.println("Level not loaded");
 			return null;

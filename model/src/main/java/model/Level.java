@@ -10,7 +10,7 @@ import model.element.special.Player;
 
 public class Level {
 	protected int id, height, width;
-	protected List<GameElement> gameElements;
+	protected List<GameElement> gameElements = new ArrayList<GameElement>();
 	protected GameElement lorann = null;
 	protected String name;
 	protected int score = 0;
@@ -21,14 +21,12 @@ public class Level {
 		this.height = height;
 		this.width = width;
 		this.id = id;
-		gameElements = new ArrayList<GameElement>();
 	}
 
 	public Level(String name, int height, int width) {
 		this.name = name;
 		this.height = height;
 		this.width = width;
-		gameElements = new ArrayList<GameElement>();
 	}
 	
 	public int getId() {

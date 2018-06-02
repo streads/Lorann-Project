@@ -9,7 +9,7 @@ public class GameElementFactory {
 		
 	
 	public static GameElement createMonster1() {
-		GameElement x = new Monster("monster");
+		GameElement x = new Monster("kyracj");
 		x.SetTickManager(new OnTickStrategy() {
 			@Override
 			public void onTick(GameElement me) {
@@ -22,7 +22,7 @@ public class GameElementFactory {
 	
 	
 	public static GameElement createMonster2() {
-		GameElement x = new Monster("monster", 1);
+		GameElement x = new Monster("cargyv");
 		x.SetTickManager(new OnTickStrategy() {
 			@Override
 			public void onTick(GameElement me) {
@@ -37,7 +37,7 @@ public class GameElementFactory {
 	
 	
 	public static GameElement createMonster3() {
-		GameElement x = new Monster("monster", 2);
+		GameElement x = new Monster("arrbarr");
 		x.SetTickManager(new OnTickStrategy() {
 			@Override
 			public void onTick(GameElement me) {
@@ -51,7 +51,7 @@ public class GameElementFactory {
 	
 	
 	public static GameElement createMonster4() {
-		GameElement x = new Monster("monster", 3);
+		GameElement x = new Monster("maarcg", 3);
 		x.SetTickManager(new OnTickStrategy() {
 			@Override
 			public void onTick(GameElement me) {
@@ -63,7 +63,7 @@ public class GameElementFactory {
 	}
 	
 	public static GameElement createCrystalBall() {
-		GameElement x = new Monster("CrystalBall");
+		GameElement x = new Monster("crystalBall");
 		x.SetTickManager(new OnTickStrategy() {
 			@Override
 			public void onTick(GameElement me) {
@@ -75,7 +75,7 @@ public class GameElementFactory {
 	}
 	
 	public static GameElement createClosedDoor() {
-		GameElement x = new GameElement("door", 1);
+		GameElement x = new GameElement("door",1);
 		return x;
 	}
 	
