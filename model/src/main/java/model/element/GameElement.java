@@ -33,7 +33,7 @@ public class GameElement {
 		if (tickManager != null) {
 			tickManager.onTick(this);	
 		}else {
-			System.err.println("no tick stategy on this object");
+			//System.err.println("no tick stategy on this object");
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class GameElement {
 		if (colliderManager != null) {
 			colliderManager.Collider(this, target);	
 		}else {
-			System.err.println("no collision strategy for this object");
+			//System.err.println("no collision strategy for this object");
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class GameElement {
 	}
 	
 	public String getTag() {
-		return identifier + "-" + state;
+		return identifier + "_" + state;
 	}
 	
 	

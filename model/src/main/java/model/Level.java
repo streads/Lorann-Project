@@ -58,11 +58,11 @@ public class Level {
 		return this.playerAction;
 	}
 	
-	public void tick() {
+	public void tick(EUserOrder playerDirection) {
 		for (GameElement gameElement : gameElements) {
 			if (gameElement instanceof Player) {
-				Player localPlayer = (Player) gameElement;
-				localPlayer.executeOrder(localPlayer, this.getPlayerAction());
+				Player localPlayer = (Player) gameElement;	
+				localPlayer.executeOrder(localPlayer, playerDirection);
 			}else {
 				gameElement.tick();	
 			}
@@ -128,10 +128,10 @@ public class Level {
 			temp = GameElementFactory.createPurse();
 			break;
 		case "-":
-			temp = GameElementFactory.createVerticalBone();
+			temp = GameElementFactory.createHorizontalBone();
 			break;
 		case "|":
-			temp = GameElementFactory.createHorizontalBone();
+			temp = GameElementFactory.createVerticalBone();
 			break;	
 		case "/":
 			temp = GameElementFactory.createBone();

@@ -76,12 +76,13 @@ public class GameElementFactory {
 	
 	public static GameElement createClosedDoor() {
 		GameElement x = new GameElement("door",1);
+		x.setPermeability(EPermeability.ALLOW_Player);
 		return x;
 	}
 	
 	public static GameElement createLorann() {
-		GameElement x = new Player("lorann");
-		return x;
+		Player x = new Player("lorann");
+		return (GameElement) x;
 	}
 	
 	public static GameElement createOpenedDoor() {

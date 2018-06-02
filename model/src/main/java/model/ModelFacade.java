@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 
 import controller.EUserOrder;
-import controller.IController;
 import model.dao.ADataBaseUseDAO;
 
 
@@ -51,14 +50,15 @@ public final class ModelFacade implements IModel {
 		}
 	}
 	@Override
-	public void loadLevel(int indice) throws SQLException {
+	public String loadLevel(int indice) throws SQLException {
 		this.setLevel(ADataBaseUseDAO.getLevelByNumber(indice));
+		return this.getLevel().getName();
 	}
 
 	@Override
 	public void moveEntities(EUserOrder playerDirection) {
 		if (level != null) {
-			level.tick();
+			level.tick(playerDirection);
 			
 		}else {
 			System.err.println("Level not loaded");
@@ -76,10 +76,10 @@ public final class ModelFacade implements IModel {
 	}
 
 	@Override
-	public void setController(IController controller) {
-		// TODO Auto-generated method stub
-		
+	public int getScore() {
+		return this.getLevel().getScore();
 	}
+
 
 
 

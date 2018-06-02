@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 
 import controller.EUserOrder;
-import controller.IController;
 
 /**
  * <h1>The Interface IModel.</h1>
@@ -14,11 +13,6 @@ import controller.IController;
  */
 public interface IModel {
 	
-    /**
-     * Set the value of the controller inside the Model
-     */
-    public void setController(IController controller);
-    
 	/**
 	 * retrieves a sprite from an element at a certain position x or y
 	 * @param x
@@ -41,7 +35,7 @@ public interface IModel {
  	 *     indice is the level ID   
      * @throws SQLException 
  	 */	
-     public void loadLevel ( int indice) throws SQLException; 
+     public String loadLevel ( int indice) throws SQLException; 
      
      /**
   	 * execute the moving algorithm of element
@@ -49,6 +43,8 @@ public interface IModel {
   	 *     playerDirection the direction wished by player  
   	 */
      public void moveEntities(EUserOrder playerDirection);
+     
+     public int getScore();
      
      
      

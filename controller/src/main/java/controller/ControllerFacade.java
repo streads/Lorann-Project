@@ -1,8 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.IModel;
 import view.IView;
@@ -15,14 +13,15 @@ import view.IView;
  */
 public class ControllerFacade implements IController, Runnable {
 	
-	private static final int LEVEL_NUMBER = 1;
+	private static final int LEVEL_NUMBER = 2;
     /** The view. */
     private final IView  view;
 
     /** The model. */
     private final IModel model;
     
-    private EUserOrder nextOrder; /** ordre de déplacement pour le model stockée/** 
+    
+    private EUserOrder nextOrder = EUserOrder.NOP; /** ordre de déplacement pour le model stockée/** 
 
     /**
      * Instantiates a new controller facade.
@@ -36,9 +35,6 @@ public class ControllerFacade implements IController, Runnable {
         super();
         this.view = view;
         this.model = model;
-        this.getView().setController(this);
-        this.getModel().setController(this);
-     
     }
 
     /**
@@ -48,9 +44,10 @@ public class ControllerFacade implements IController, Runnable {
     	   
         this.getView().displayMessage("WELCOME TO THE CRYPT");
     	try {
-			this.getModel().loadLevel(LEVEL_NUMBER);
+    		this.getView().setLevelName(this.getModel().loadLevel(LEVEL_NUMBER)); 
 			this.getView().createUI(this.getModel().getLevelDimension().width, this.getModel().getLevelDimension().height);
-	    	this.run();
+			
+			this.run();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,11 +55,13 @@ public class ControllerFacade implements IController, Runnable {
     	
  
     }
-    private void sendSpritToView() {
-    	String[][] elms =  new String[this.getModel().getLevelDimension().height][this.getModel().getLevelDimension().width];
+    private void refreshView() {
     	
-		for (int x = 0; x < this.getModel().getLevelDimension().height; x++) {
-    		for (int y = 0; y < this.getModel().getLevelDimension().width; y++) {
+    	this.getView().setScore(this.getModel().getScore());
+    	
+    	String[][] elms =  new String[this.getModel().getLevelDimension().width][this.getModel().getLevelDimension().height];
+		for (int x = 0; x < this.getModel().getLevelDimension().width; x++) {
+    		for (int y = 0; y < this.getModel().getLevelDimension().height; y++) {
     			elms[x][y] = this.getModel().getTagElement(x, y); 
     		}
 		}
@@ -89,11 +88,12 @@ public class ControllerFacade implements IController, Runnable {
 	@Override
 	public void run() {
     	for( ;; ) {
-    		sendSpritToView();
+    		refreshView();
+    		
     		this.getModel().moveEntities(nextOrder); // on récupere l'ordre de déplacement 
     		nextOrder = EUserOrder.NOP; // Permet de dire que l'ordre à été effectuer 
     		try {
-				Thread.sleep(1000);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();

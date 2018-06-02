@@ -19,8 +19,9 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
-        final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
-
+    	ViewFacade view = new ViewFacade();
+        final ControllerFacade controller = new ControllerFacade(view, new ModelFacade());
+        view.setController(controller);
         controller.start();
     }
 
