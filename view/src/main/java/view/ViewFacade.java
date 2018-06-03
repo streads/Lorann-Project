@@ -78,7 +78,8 @@ public class ViewFacade implements IView   {
         
         try {
         for (Tile tile : tiles) {
-			tile.loadImage();
+        	tile.loadImage();
+			
 		}
         }catch(Exception ex) {
         	System.err.println("Can't load images");

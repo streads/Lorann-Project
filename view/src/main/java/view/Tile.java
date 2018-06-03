@@ -51,6 +51,7 @@ public class Tile implements ISquare {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public final void loadImage() throws IOException {
+    	//System.err.println(this.getClass().getResource("/sprites/" + this.getImageName() + ".png").getPath());
         this.setImage(ImageIO.read(this.getClass().getResource("/sprites/" + this.getImageName() + ".png")));
     }
 

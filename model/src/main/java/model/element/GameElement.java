@@ -46,6 +46,7 @@ public class GameElement {
 	}
 	
 	public void kill() {
+		this.setPostion(-1, -1);
 		this.getLevel().removeElement(this);
 	};
 	

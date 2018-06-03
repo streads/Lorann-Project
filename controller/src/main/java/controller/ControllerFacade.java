@@ -13,7 +13,7 @@ import view.IView;
  */
 public class ControllerFacade implements IController, Runnable {
 	
-	private static final int LEVEL_NUMBER = 2;
+	private int levelNumber = 2;
     /** The view. */
     private final IView  view;
 
@@ -22,6 +22,8 @@ public class ControllerFacade implements IController, Runnable {
     
     
     private EUserOrder nextOrder = EUserOrder.NOP; /** ordre de déplacement pour le model stockée/** 
+
+	
 
     /**
      * Instantiates a new controller facade.
@@ -41,10 +43,9 @@ public class ControllerFacade implements IController, Runnable {
      * Start.
      */
     public void start() {
-    	   
-        this.getView().displayMessage("WELCOME TO THE CRYPT");
+        //this.getView().displayMessage("WELCOME TO THE CRYPT");
     	try {
-    		this.getView().setLevelName(this.getModel().loadLevel(LEVEL_NUMBER)); 
+    		this.getView().setLevelName(this.getModel().loadLevel(levelNumber)); 
 			this.getView().createUI(this.getModel().getLevelDimension().width, this.getModel().getLevelDimension().height);
 			
 			this.run();
@@ -93,7 +94,7 @@ public class ControllerFacade implements IController, Runnable {
     		this.getModel().moveEntities(nextOrder); // on récupere l'ordre de déplacement 
     		nextOrder = EUserOrder.NOP; // Permet de dire que l'ordre à été effectuer 
     		try {
-				Thread.sleep(200);
+				Thread.sleep(125);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();
@@ -107,8 +108,10 @@ public class ControllerFacade implements IController, Runnable {
 	*/
 	public void orderPerformer(EUserOrder userOrder) {
 		nextOrder = userOrder;
-		
-		
+	}
+	
+	public void setLevel(int level) {
+		levelNumber = level;
 	}
 }
 

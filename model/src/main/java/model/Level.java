@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import controller.EUserOrder;
@@ -15,6 +16,9 @@ public class Level {
 	protected String name;
 	protected int score = 0;
 	protected EUserOrder playerAction;
+	
+	protected List<GameElement> endTickKillElements = new ArrayList<GameElement>();
+	protected List<GameElement> endTickCreateElements = new ArrayList<GameElement>();
 	
 	public Level(int id, String name, int height, int width) {
 		this.name = name;
@@ -59,29 +63,40 @@ public class Level {
 	}
 	
 	public void tick(EUserOrder playerDirection) {
+		
 		for (GameElement gameElement : gameElements) {
 			if (gameElement instanceof Player) {
 				Player localPlayer = (Player) gameElement;	
 				localPlayer.executeOrder(localPlayer, playerDirection);
 			}else {
-				gameElement.tick();	
+				gameElement.tick();
 			}
 			
 		}
+		checkCollision();
+
+		gameElements.addAll(endTickCreateElements);
+		endTickCreateElements.clear();
+		
+		gameElements.removeAll(endTickKillElements);
+		endTickKillElements.clear();
 	}
 	
 	public void checkCollision() {
 		for (GameElement gameElement : gameElements) {
 			for (GameElement gameElement2 : gameElements) {
-				if(gameElement.getX() == gameElement2.getX() && gameElement.getY() == gameElement2.getY()) {
+				if(gameElement.getX() == gameElement2.getX() && gameElement.getY() == gameElement2.getY() && gameElement != gameElement2) {
+					//System.out.println("collide " + gameElement.getIdentifier() + " >" + gameElement2.getIdentifier());
 					gameElement.collide(gameElement2);	
 				}
 			}
 		}
 	}
 	
-	public void removeElement(GameElement element) {
-		gameElements.remove(element);
+	public void removeElement(GameElement element)
+	{
+		System.out.println("removed " + element.getIdentifier());
+		endTickKillElements.add(element);
 	}
 	
 	public GameElement getElement(int x, int y) {
@@ -94,6 +109,10 @@ public class Level {
 		return null;
 	}
 	
+	public void addElement(GameElement element) {
+		element.setLevel(this);
+		endTickCreateElements.add(element);
+	}
 	
 	public void addElement(String identifier, int x, int y){
 		GameElement temp = null;

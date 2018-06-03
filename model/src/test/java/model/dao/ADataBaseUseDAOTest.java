@@ -33,9 +33,9 @@ public class ADataBaseUseDAOTest {
 	public void testFeedLevel() throws SQLException {
 		Level level1 = ADataBaseUseDAO.getLevelByNumber(1);
 		ADataBaseUseDAO.feedLevel(level1);
-		assertTrue("Position of Lorann is wrong", level1.getElement(5,6).getIdentifier() == "L");
-		assertTrue("Position of Circle Bone is wrong", level1.getElement(5,10).getIdentifier() == "/");
-		assertTrue("Position of Vertical Bone is wrong", level1.getElement(6,1).getIdentifier() == "|");
+		assertTrue("Position of Lorann is wrong", level1.getElement(5,6).getIdentifier() == "lorann");
+		assertTrue("Position of Circle Bone is wrong", level1.getElement(5,10).getIdentifier() == "bone");
+		assertTrue("Position of Vertical Bone is wrong", level1.getElement(6,1).getIdentifier() == "bone");
 	}
 
 	

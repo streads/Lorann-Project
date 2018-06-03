@@ -14,7 +14,7 @@ public interface IController extends IOrderPerformer{
     /**
      * start the controller.
      */
-	public void start (); 
+	public void start(); 
 	
     /**
      * Return the model used by the controller.
