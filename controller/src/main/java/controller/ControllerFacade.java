@@ -21,7 +21,8 @@ public class ControllerFacade implements IController, Runnable {
     private final IModel model;
     
     
-    private EUserOrder nextOrder = EUserOrder.NOP; /** ordre de déplacement pour le model stockée/** 
+    private EUserOrder nextOrder = EUserOrder.NOP; /** displacement order for the stored model
+/** 
 
 	
 
@@ -91,8 +92,9 @@ public class ControllerFacade implements IController, Runnable {
     	for( ;; ) {
     		refreshView();
     		
-    		this.getModel().moveEntities(nextOrder); // on récupere l'ordre de déplacement 
-    		nextOrder = EUserOrder.NOP; // Permet de dire que l'ordre à été effectuer 
+    		this.getModel().moveEntities(nextOrder); // we recover the movement order
+
+    		nextOrder = EUserOrder.NOP; // Allows to say that the order has been made 
     		try {
 				Thread.sleep(125);
 			} catch (InterruptedException e) {
@@ -104,12 +106,12 @@ public class ControllerFacade implements IController, Runnable {
 	}
 
 	@Override
-	/**	on passe au controleur l'ordre que nous envoie la vue 
-	*/
+	/**	we pass to the controller the order that sends us the view */
 	public void orderPerformer(EUserOrder userOrder) {
 		nextOrder = userOrder;
 	}
 	
+	/** define the number of the level */ 
 	public void setLevel(int level) {
 		levelNumber = level;
 	}

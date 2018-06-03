@@ -40,10 +40,15 @@ public interface IModel {
      /**
   	 * execute the moving algorithm of element
   	 * @param indice 
-  	 *     playerDirection the direction wished by player  
+  	 *     playerAction the action wished by player  
   	 */
-     public void moveEntities(EUserOrder playerDirection);
+     public void moveEntities(EUserOrder playerAction);
      
+     
+     /**
+      * 
+      * @return the score of the player 
+      */
      public int getScore();
      
      

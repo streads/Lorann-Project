@@ -24,13 +24,13 @@ public interface IView {
     public void setController(IController controller);
     
     /**
-     * Generate the window of the game
-     * @param height
-     *     height of the window
-     * @param width
-     *     width of the windows
+     * Generate the graphical interface of a level 
+     * @param columns
+     *     columns of the level
+     * @param rows
+     *     rows of the level
      */
-	public void createUI(int height, int width);
+	public void createUI(int columns, int rows);
 	    
 	/**
 	 * Set the score of the player
@@ -48,7 +48,7 @@ public interface IView {
 	
 	/**
 	 * Refreshes the window
-	 * @param elm
+	 * @param element times
 	 *     An array of element tag to disp on the window
 	 */
 	public void refreshModelData(String[][] elementTags);
