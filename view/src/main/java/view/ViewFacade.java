@@ -17,19 +17,42 @@ import controller.IController;
 /**
  * <h1>The Class ViewFacade provides a facade of the View component.</h1>
  *
- * @author Hugo Peterhansel
+ * @author Hugo Peterhansel hugo.peterhansel@viacesi.fr
  * @version 1.0
  */
 
 public class ViewFacade implements IView   {
-	
+    
+	/**
+     * titleRow and titleColumn (Height and Width of the current level)
+     */
 	private int tileRow, tileColumn;
+    
+	/**
+     * Size of the sprite
+     */
 	private int elementSize = 32;
 	
+    /**
+     * List of loaded images
+     */
 	private List<Tile> tiles = new ArrayList<Tile>(); 
-	private Frame window = null;
+    
+	/**
+     * Window of the current level
+     */
+	private JFrame window = null;
+	
+    /**
+     * Images of the level
+     */
 	private JLabel[][] jlabels = new JLabel[100][100];
+	
+    /**
+     * Current score and level
+     */
 	private String score, level;
+	
     /**
      * Access point to the controller
      */
@@ -45,6 +68,9 @@ public class ViewFacade implements IView   {
         
     }
     
+    /**
+     * Load images into Tiles
+     */
     public void loadTile() {
         // we should use a loop in folder path to add automatically image
         
@@ -52,25 +78,33 @@ public class ViewFacade implements IView   {
         tiles.add(new Tile("black"));
         tiles.add(new Tile("bone_0"));
         tiles.add(new Tile("bone_1"));
-        tiles.add(new Tile("bone_2"));   
-        tiles.add(new Tile("kyracj_0")); // load monster sprites
+		tiles.add(new Tile("bone_2")); 
+		
+		// load monster sprites
+        tiles.add(new Tile("kyracj_0")); 
         tiles.add(new Tile("cargyv_0"));
         tiles.add(new Tile("arrbarr_0"));
-        tiles.add(new Tile("maarcg_0"));
-        tiles.add(new Tile("fireball_0")); // load power sprites
+		tiles.add(new Tile("maarcg_0"));
+		
+		// load power sprites
+        tiles.add(new Tile("fireball_0")); 
         tiles.add(new Tile("fireball_1"));
         tiles.add(new Tile("fireball_2"));
         tiles.add(new Tile("fireball_3"));
-        tiles.add(new Tile("fireball_4"));
-        tiles.add(new Tile("lorann_0")); // load lorann sprites
+		tiles.add(new Tile("fireball_4"));
+
+		// load lorann sprites
+        tiles.add(new Tile("lorann_0")); 
         tiles.add(new Tile("lorann_1"));
         tiles.add(new Tile("lorann_2"));
         tiles.add(new Tile("lorann_3"));
         tiles.add(new Tile("lorann_4"));
         tiles.add(new Tile("lorann_5"));
         tiles.add(new Tile("lorann_6"));
-        tiles.add(new Tile("lorann_7"));
-        tiles.add(new Tile("crystalBall_0")); // load the others sprites
+		tiles.add(new Tile("lorann_7"));
+		
+		// load the others sprites
+        tiles.add(new Tile("crystalBall_0")); 
         tiles.add(new Tile("door_0"));
         tiles.add(new Tile("door_1"));
         tiles.add(new Tile("purse_0"));
@@ -78,8 +112,7 @@ public class ViewFacade implements IView   {
         
         try {
         for (Tile tile : tiles) {
-        	tile.loadImage();
-			
+			tile.loadImage();
 		}
         }catch(Exception ex) {
         	System.err.println("Can't load images");
@@ -87,8 +120,9 @@ public class ViewFacade implements IView   {
     }
     
     public Dimension getDimension() {
-    	return new Dimension(tileRow, tileColumn);
+    	return new Dimension(tileColumn, tileRow);
     }
+    
     /**
      * Set the value of the controller inside the View
      */
@@ -110,19 +144,17 @@ public class ViewFacade implements IView   {
 
 	@Override
 	public void createUI(int tileColumn, int tileRow) {
-		window = new Frame("Lorann", controller);
+		this.tileColumn = tileColumn;
+		this.tileRow = tileRow;
+		window = new JFrame("Lorann");
 		window.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -131,7 +163,6 @@ public class ViewFacade implements IView   {
 					switch (e.getKeyCode())
 				    {
 				    	case KeyEvent.VK_UP:
-				    		
 				    		controller.orderPerformer(EUserOrder.TOP);
 				    		break;
 				    	case KeyEvent.VK_DOWN:
@@ -178,20 +209,15 @@ public class ViewFacade implements IView   {
 		
 		window.setVisible(true);
 		window.repaint();
-		
-			
-		
 	}
 
 	@Override
 	public void setScore(int score) {
-		// TODO Auto-generated method stub
 		this.score = Integer.toString(score);
 	}
 
 	@Override
 	public void setLevelName(String name) {
-		// TODO Auto-generated method stub
 		this.level = name;
 	}
 	
@@ -211,20 +237,15 @@ public class ViewFacade implements IView   {
 						if(tile.getImageName().contentEquals(elementsTags[x][y])) {
 							jlabels[x][y].setIcon(new ImageIcon(tile.getImage()));
 						}
-					}
-					
+					}	
 				}
 			}
 		}
 		
-
-		
-
 		window.repaint();
 	}
 	
-	public Frame getFrame() {
-		return null;
+	public JFrame getFrame() {
+		return this.window;
 	}
 }
-
