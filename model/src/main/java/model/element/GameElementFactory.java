@@ -11,7 +11,7 @@ public class GameElementFactory {
    
     public static GameElement createMonster1() {
         GameElement x = new Monster("kyracj");
-        x.SetTickManager(new OnTickStrategy() {
+        x.setTickManager(new OnTickStrategy() {
             int a = 1;
             int b = -1;
            
@@ -21,7 +21,7 @@ public class GameElementFactory {
                
                 int xPosition = x.getX();
                 int yPosition = x.getY();
-               
+                
                 GameElement gameElementAim = x.getLevel().getElement(xPosition + a, yPosition);
                 if(gameElementAim == null) {
                     x.setPostion(xPosition + a, yPosition);
@@ -50,7 +50,7 @@ public class GameElementFactory {
    
     public static GameElement createMonster2() {
         GameElement x = new Monster("cargyv");
-        x.SetTickManager(new OnTickStrategy() {
+        x.setTickManager(new OnTickStrategy() {
             int a = 1;
             int b = -1;
            
@@ -91,7 +91,7 @@ public class GameElementFactory {
    
     public static GameElement createMonster3() {
         GameElement x = new Monster("arrbarr");
-        x.SetTickManager(new OnTickStrategy() {
+        x.setTickManager(new OnTickStrategy() {
             int a = 1;
             int b = 0;
             @Override
@@ -133,7 +133,7 @@ public class GameElementFactory {
    
     public static GameElement createMonster4() {
         GameElement x = new Monster("maarcg");
-        x.SetTickManager(new OnTickStrategy() {
+        x.setTickManager(new OnTickStrategy() {
            
             @Override
             public void onTick(GameElement me) {
@@ -174,7 +174,7 @@ public class GameElementFactory {
     public static GameElement createCrystalBall() {
         GameElement x = new GameElement("crystalBall");
         x.setPermeability(EPermeability.ALLOW_Player);
-        x.SetTickManager(new OnTickStrategy() {
+        x.setTickManager(new OnTickStrategy() {
             @Override
             public void onTick(GameElement me) {
                 // TODO Auto-generated method stub
@@ -187,14 +187,17 @@ public class GameElementFactory {
     public static GameElement createClosedDoor() {
         GameElement x = new GameElement("door",1);
         x.setPermeability(EPermeability.ALLOW_Player);
-        x.SetColliderManager(new OnCollisionStrategy() {
+        x.setColliderManager(new OnCollisionStrategy() {
            
             @Override
-            public void Collider(GameElement me, GameElement target) {
-                if (target instanceof Player) {
-                    target.kill();
+            public void collider(GameElement me, GameElement target) {
+            	if (target instanceof Player) {
+            		if (x.getState() == 1) {
+            			target.kill();	
+            		}else {
+            			x.getLevel().IsOver(true);
+            		}   
                 }
-               
             }
         });
         return x;

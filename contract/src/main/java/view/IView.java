@@ -48,10 +48,10 @@ public interface IView {
 	
 	/**
 	 * Refreshes the window
-	 * @param element times
+	 * @param elementsTag
 	 *     An array of element tag to disp on the window
 	 */
-	public void refreshModelData(String[][] elementTags);
+	public void refreshModelData(String[][] elementsTag);
 
 
 

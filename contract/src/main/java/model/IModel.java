@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Dimension;
-import java.sql.SQLException;
 
 import controller.EUserOrder;
 
@@ -33,25 +32,30 @@ public interface IModel {
  	 * allows to load the environment
  	 * @param indice 
  	 *     indice is the level ID   
-     * @throws SQLException 
+     *
  	 */	
-     public String loadLevel ( int indice) throws SQLException; 
+     public String loadLevel ( int indice); 
      
      /**
   	 * execute the moving algorithm of element
-  	 * @param indice 
+  	 * @param playerAction 
   	 *     playerAction the action wished by player  
   	 */
      public void moveEntities(EUserOrder playerAction);
      
      
      /**
-      * 
-      * @return the score of the player 
+      * Get the score of the player
       */
      public int getScore();
      
      
+     /**
+      * Get the current state of the game
+      * @return a EGameState
+      * 	
+      */
+     public EGameState getLevelState();
      
      
      

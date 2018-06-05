@@ -21,11 +21,11 @@ public class GameElement {
 		this.state = state;
 	}
 	
-	public void SetColliderManager(OnCollisionStrategy colliderManager) {
+	public void setColliderManager(OnCollisionStrategy colliderManager) {
 		this.colliderManager = colliderManager;
 	}
 	
-	public void SetTickManager(OnTickStrategy tickManager) {
+	public void setTickManager(OnTickStrategy tickManager) {
 		this.tickManager = tickManager;
 	}
 	
@@ -39,7 +39,7 @@ public class GameElement {
 	
 	public void collide(GameElement target) {
 		if (colliderManager != null) {
-			colliderManager.Collider(this, target);	
+			colliderManager.collider(this, target);	
 		}else {
 			//System.err.println("no collision strategy for this object");
 		}
@@ -47,7 +47,10 @@ public class GameElement {
 	
 	public void kill() {
 		this.setPostion(-1, -1);
-		this.getLevel().removeElement(this);
+		if (this.getLevel() != null) {
+			this.getLevel().removeElement(this);	
+		}
+		this.setLevel(null);
 	};
 	
 	public void setState(int state) {

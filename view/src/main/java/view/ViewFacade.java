@@ -146,6 +146,10 @@ public class ViewFacade implements IView   {
 	public void createUI(int tileColumn, int tileRow) {
 		this.tileColumn = tileColumn;
 		this.tileRow = tileRow;
+		if (window != null) {
+			window.setVisible(false); //you can't see me!
+			window.dispose(); //Destroy the JFrame object
+		}
 		window = new JFrame("Lorann");
 		window.addKeyListener(new KeyListener() {
 			
@@ -162,21 +166,33 @@ public class ViewFacade implements IView   {
 				if (controller != null) {
 					switch (e.getKeyCode())
 				    {
-				    	case KeyEvent.VK_UP:
+				    	case KeyEvent.VK_NUMPAD8:
 				    		controller.orderPerformer(EUserOrder.TOP);
 				    		break;
-				    	case KeyEvent.VK_DOWN:
+				    	case KeyEvent.VK_NUMPAD7:
+				    		controller.orderPerformer(EUserOrder.TOP_LEFT);
+				    		break;
+				    	case KeyEvent.VK_NUMPAD9:
+				    		controller.orderPerformer(EUserOrder.TOP_RIGHT);
+				    		break;	
+				    	case KeyEvent.VK_NUMPAD2:
 				    		controller.orderPerformer(EUserOrder.BOTTOM);
 				            break;
-				    	case KeyEvent.VK_LEFT:
+				    	case KeyEvent.VK_NUMPAD4:
 				    		controller.orderPerformer(EUserOrder.LEFT);
 				            break;
-				    	case KeyEvent.VK_RIGHT:
+				    	case KeyEvent.VK_NUMPAD6:
 				    		controller.orderPerformer(EUserOrder.RIGHT);
 				            break;
-				    	case KeyEvent.VK_SPACE:
+				    	case KeyEvent.VK_NUMPAD5:
 				    		controller.orderPerformer(EUserOrder.SPELLCAST);
 				            break;
+				    	case KeyEvent.VK_NUMPAD1:
+				    		controller.orderPerformer(EUserOrder.BOTTOM_LEFT);
+				    		break;
+				    	case KeyEvent.VK_NUMPAD3:
+				    		controller.orderPerformer(EUserOrder.BOTTOM_RIGHT);
+				    		break;					            
 				    	default:
 				    		controller.orderPerformer(EUserOrder.NOP);
 				    		break;

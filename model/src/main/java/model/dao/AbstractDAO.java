@@ -1,8 +1,6 @@
 package model.dao;
 
 import java.sql.CallableStatement;
-import java.sql.ResultSet;
-
 /**
  * <h1>The Class AbstractDAO.</h1>
  * 
@@ -17,22 +15,22 @@ public abstract class AbstractDAO {
      * @param query
      *            the query
      * @return the result set
+     
+     protected static ResultSet executeQuery(final String query) {
+     	return LorannBDDConnector.getInstance().executeQuery(query);
+     }
      */
-    protected static ResultSet executeQuery(final String query) {
-        return LorannBDDConnector.getInstance().executeQuery(query);
-    }
-
     /**
      * Execute update.
      *
      * @param query
      *            the query
      * @return the int
+     
+      protected static int executeUpdate(final String query) {
+          return LorannBDDConnector.getInstance().executeUpdate(query);
+      }
      */
-    protected static int executeUpdate(final String query) {
-        return LorannBDDConnector.getInstance().executeUpdate(query);
-    }
-
     /**
      * Prepare call.
      *

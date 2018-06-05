@@ -3,7 +3,6 @@ package main;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import controller.ControllerFacade;
@@ -13,7 +12,7 @@ import view.ViewFacade;
 /**
  * <h1>The Class Main.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Thibault Hanna thibault.hanna@viacesi.fr
  * @version 1.0
  */
 public abstract class Main {

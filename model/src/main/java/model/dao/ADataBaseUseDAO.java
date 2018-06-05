@@ -61,7 +61,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
             if (result.first()) {
-                level = new Level(id, result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex));
+                level = new Level(id, result.getString(nameColumnIndex), result.getInt(widthColumnIndex), result.getInt(heightColumnIndex));
             }
             result.close();
         }
@@ -97,7 +97,7 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
             final ResultSet result = callStatement.getResultSet();
 
             for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
-                level.add(new Level(result.getString(nameColumnIndex), result.getInt(heightColumnIndex), result.getInt(widthColumnIndex)));
+                level.add(new Level(result.getString(nameColumnIndex), result.getInt(widthColumnIndex),  result.getInt(heightColumnIndex)));
             }
             result.close();
         }

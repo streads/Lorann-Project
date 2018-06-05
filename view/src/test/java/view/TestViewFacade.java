@@ -24,6 +24,7 @@ public class TestViewFacade {
         test.setScore(400);
         test.setLevelName("Test level");
         String[][] x = new String[20][20];
+        x[0][0] = "lorann_0";
         test.refreshModelData(x);
         assertEquals(test.getFrame().getTitle(), "Lorann [Test level] score: 400", test.getFrame().getTitle());
 	}

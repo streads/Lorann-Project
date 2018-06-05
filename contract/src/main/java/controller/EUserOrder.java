@@ -11,7 +11,11 @@ public enum EUserOrder {
 	RIGHT,
 	LEFT,
 	TOP,
+	TOP_LEFT,
+	TOP_RIGHT,
 	BOTTOM,
+	BOTTOM_LEFT,
+	BOTTOM_RIGHT,
 	NOP,
 	SPELLCAST
 }

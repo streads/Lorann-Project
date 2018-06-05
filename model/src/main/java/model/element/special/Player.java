@@ -2,9 +2,6 @@ package model.element.special;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hamcrest.core.IsInstanceOf;
-
 import controller.EUserOrder;
 import model.element.EPermeability;
 import model.element.GameElement;
@@ -13,17 +10,31 @@ import model.element.OnTickStrategy;
 
 public class Player extends GameElement {
 	int lastTickAction = 0;
-	public GameElement me = this;
-	public GameElement spell = null;
+	private GameElement me = this;
+	private GameElement spell = null;
 	private EUserOrder lastMovement = EUserOrder.NOP;
 	
 	public Player(String identifier) {
 		super(identifier);
 		super.setPermeability(EPermeability.ALLOW_ALL);
-		super.SetColliderManager(new OnCollisionStrategy() {
+		
+		super.setTickManager(new OnTickStrategy() {
 			
 			@Override
-			public void Collider(GameElement me, GameElement target) {
+			public void onTick(GameElement me) {
+				if(me.getState() == 7) {
+					me.setState(0);
+				}else {
+					me.setState(me.getState() + 1);
+				}
+								
+			}
+		});
+		
+		super.setColliderManager(new OnCollisionStrategy() {
+			
+			@Override
+			public void collider(GameElement me, GameElement target) {
 				// TODO Auto-generated method stub
 				if (target.getIdentifier() == "purse") {
 					target.kill();
@@ -39,8 +50,7 @@ public class Player extends GameElement {
 							GameElement localElement = me.getLevel().getElement(i, j);
 							if (localElement == null) {}
 							else if (localElement.getIdentifier() == "crystalBall") {
-								System.out.println("on ataper chef");
-								found = true;
+ 								found = true;
 								return;
 							}
 							else if (localElement.getIdentifier() == "door") {
@@ -78,19 +88,30 @@ public class Player extends GameElement {
 			yPosition -= 1;
 			super.setState(4);
 			break;
+		case TOP_LEFT:
+			xPosition -= 1;
+			yPosition -= 1;
+			break;
+		case TOP_RIGHT:
+			xPosition += 1;
+			yPosition -= 1;
+			break;			
 		case BOTTOM:
 			yPosition += 1;
 			super.setState(0);
 			break;
+		case BOTTOM_LEFT:
+			xPosition -= 1;
+			yPosition += 1;
+			break;
+		case BOTTOM_RIGHT:
+			xPosition += 1;
+			yPosition += 1;
+			break;				
 		case SPELLCAST:
 			createSpell();
 			break;
 		case NOP:
-			if(super.getState() == 7) {
-				super.setState(0);
-			}else {
-				super.setState(me.getState() + 1);
-			}
 			break;
 		}
 		
@@ -114,11 +135,12 @@ public class Player extends GameElement {
 			switch (lastMovement) {
 				case LEFT:
 					spell.setPostion(xPosition + 1, yPosition);
-					spell.SetTickManager(new  OnTickStrategy() {
+					spell.setTickManager(new  OnTickStrategy() {
 						int a = 1;
 						int b = -1;
 						@Override
 						public void onTick(GameElement mySpell) {
+							
 							if (mySpell.getState() == 4) {
 								mySpell.setState(0);
 							}else {
@@ -145,12 +167,13 @@ public class Player extends GameElement {
 							int c = b;
 							b = a;
 							a = c;
+							
 						}
 					});
 					break;
 				case RIGHT:
 					spell.setPostion(xPosition - 1, yPosition);
-					spell.SetTickManager(new  OnTickStrategy() {
+					spell.setTickManager(new  OnTickStrategy() {
 						int a = -1;
 						int b = 1;
 						@Override
@@ -186,11 +209,12 @@ public class Player extends GameElement {
 					break;
 				case TOP:
 					spell.setPostion(xPosition, yPosition + 1);
-					spell.SetTickManager(new  OnTickStrategy() {
+					spell.setTickManager(new  OnTickStrategy() {
 						int a = 1;
 						int b = -1;
 						@Override
 						public void onTick(GameElement mySpell) {
+							
 							if (mySpell.getState() == 4) {
 								mySpell.setState(0);
 							}else {
@@ -222,7 +246,7 @@ public class Player extends GameElement {
 					break;	
 				case BOTTOM:
 					spell.setPostion(xPosition, yPosition - 1);
-					spell.SetTickManager(new  OnTickStrategy() {
+					spell.setTickManager(new  OnTickStrategy() {
 						int a = -1;
 						int b = 1;
 						@Override
@@ -256,12 +280,14 @@ public class Player extends GameElement {
 						}
 					});
 					break;
+			default:
+				break;
 			}
 				
-			spell.SetColliderManager(new OnCollisionStrategy() {
+			spell.setColliderManager(new OnCollisionStrategy() {
 			
 				@Override
-				public void Collider(GameElement mySpell, GameElement target) {
+				public void collider(GameElement mySpell, GameElement target) {
 					if (target instanceof Player || target instanceof Monster) {
 						Player lcl = (Player) me;
 						lcl.spell = null;
