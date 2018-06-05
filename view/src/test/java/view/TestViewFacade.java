@@ -7,7 +7,10 @@ import java.io.IOException;
 import org.junit.Test;
 
 public class TestViewFacade {
-
+	
+    /**
+     * Create a test window and check its the width/height
+     */
 	@Test
 	public void testCreateUI(){
 		ViewFacade test = new ViewFacade();
@@ -17,6 +20,9 @@ public class TestViewFacade {
         assertEquals("Invalid height", 20,  test.getDimension().height);
 	}
 	
+    /**
+     * Create a test window, set a score, a level, refresh and check if the good values are shown
+     */
 	@Test
 	public void testRefresh(){
 		ViewFacade test = new ViewFacade();
@@ -29,6 +35,9 @@ public class TestViewFacade {
         assertEquals(test.getFrame().getTitle(), "Lorann [Test level] score: 400", test.getFrame().getTitle());
 	}
 	
+    /**
+     * Create test Tile, load an image within it and check if the Tile contain the image
+     */
 	@Test
 	public void testLoadImage() throws IOException {
 		Tile tile = new Tile("black");
