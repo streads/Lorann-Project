@@ -30,19 +30,19 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
 	 /** The id column index. */
     private static int    nameColumnIndex    = 1;
 
-    /** The name column index. */
+    /** The height column index. */
     private static int    heightColumnIndex  = 2;
     
-    /** The name column index. */
+    /** The width column index. */
     private static int    widthColumnIndex  = 3;
 	
-    /** The name column index. */
+    /** The identifier column index. */
     private static int    identifierColumnIndex  = 1;
 	
-    /** The name column index. */
+    /** The x position column index. */
     private static int    xPositonColumnIndex  = 2;
 	
-    /** The name column index. */
+    /** The y position column index. */
     private static int    yPositionColumnIndex  = 3;
 	
 	/**
@@ -69,7 +69,11 @@ public abstract class ADataBaseUseDAO extends AbstractDAO {
         return level;
 	}
 	
-
+	/**
+	 * Load the elements of a level stored in the database
+	 * @param level
+	 * @throws SQLException
+	 */
 	public static void feedLevel(Level level) throws SQLException {
         final CallableStatement callStatement = prepareCall(sqlElementsByLevel);
         callStatement.setInt(1, level.getId());
