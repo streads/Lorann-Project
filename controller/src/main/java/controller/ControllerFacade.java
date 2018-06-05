@@ -24,10 +24,8 @@ public class ControllerFacade implements IController, Runnable {
     
     
     
-    
-    private EUserOrder nextOrder = EUserOrder.NOP; /** displacement order for the stored model
-/** 
-
+    /** deplacement order for the stored model */
+    private EUserOrder nextOrder = EUserOrder.NOP; 
 	
 
     /**

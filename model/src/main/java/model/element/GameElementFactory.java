@@ -1,6 +1,5 @@
 package model.element;
  
-import java.util.Random;
 import model.element.special.Monster;
 import model.element.special.Player;
  
@@ -8,7 +7,10 @@ public class GameElementFactory {
    
  
        
-   
+	/** Create the monster 'kyracj'
+	 * Movement Pattern: move from left to right
+	 * @return a GameElement
+	 */
     public static GameElement createMonster1() {
         GameElement x = new Monster("kyracj");
         x.setTickManager(new OnTickStrategy() {
@@ -47,7 +49,10 @@ public class GameElementFactory {
         return x;
     }
    
-   
+	/** Create the monster 'cargyv'
+	 * Movement Pattern: move from top to bottom
+	 * @return a GameElement
+	 */
     public static GameElement createMonster2() {
         GameElement x = new Monster("cargyv");
         x.setTickManager(new OnTickStrategy() {
@@ -86,9 +91,10 @@ public class GameElementFactory {
         return x;
     }
    
-   
-   
-   
+	/** Create the monster 'arrbarr'
+	 * Movement Pattern: is always following the left wall
+	 * @return a GameElement
+	 */
     public static GameElement createMonster3() {
         GameElement x = new Monster("arrbarr");
         x.setTickManager(new OnTickStrategy() {
@@ -120,39 +126,61 @@ public class GameElementFactory {
                             a = 1;
                         }
                     }
-               
                 }
             }      
-           
-           
         });
         return x;
     }
    
    
-   
+	/** Create the monster 'maarcg'
+	 * Movement Pattern: don't move until a player is too close
+	 * @return a GameElement
+	 */
     public static GameElement createMonster4() {
-        GameElement x = new Monster("maarcg");
+    	
+    	GameElement x = new Monster("maarcg");
         x.setTickManager(new OnTickStrategy() {
-           
-            @Override
-            public void onTick(GameElement me) {
-                // TODO Auto-generated method stub
-                int randomValue = new Random().nextInt(16);
-                if (randomValue == 8 && CanIMove(x.getX() + 1, x.getY())) {
-       
-                    x.setPostion(x.getX() + 1, x.getY());
-                   
-                }else if(randomValue == 9 && CanIMove(x.getX() - 1, x.getY())){
-                    x.setPostion(x.getX() - 1, x.getY());
-                }else if(randomValue == 10 && CanIMove(x.getX(), x.getY() + 1)){
-           
-                    x.setPostion(x.getX(), x.getY() + 1);
-                }else if(randomValue == 11  && CanIMove(x.getX(), x.getY() - 1)){
-                   
-                    x.setPostion(x.getX(), x.getY() - 1);
-                }
-            }
+        	
+        @Override
+        public void onTick(GameElement me) {
+        	
+        	int difA = me.getLevel().getPlayer().getX() - me.getX();
+        	// a < 0 gauche
+        	// a > 0 droite
+        	// b < 0 haut
+        	// b > 0 bas
+        	int difB = me.getLevel().getPlayer().getY() - me.getY();
+
+        	if(Math.abs(difA) + Math.abs(difB) > 3) {
+        		return;
+        	}
+        	
+        	int a = 0;
+        	int b = 0;
+        	if(difA < 0 && CanIMove(me.getX() - 1, me.getY())) {
+        		a = -1;
+        		b = 0;
+        	}else if(difA > 0 && CanIMove(me.getX() + 1, me.getY() )){
+        		a = 1;
+        		b = 0;
+        	}else if(difB < 0 && CanIMove(me.getX(), me.getY() - 1) ) {
+        		a = 0;
+        		b = -1;
+        	}else if(difB > 0 && CanIMove(me.getX(), me.getY() + 1)) {
+        		a = 0;
+        		b = 1;
+        	}
+        	
+        	if (CanIMove(me.getX() + a, me.getY() + b)){
+    			me.setPostion(me.getX() + a, me.getY() + b);
+    		}else if(CanIMove(me.getX() + a, me.getY())){
+    			me.setPostion(me.getX() + a, me.getY());
+    		}else if(CanIMove(me.getX(), me.getY() + b)) {
+    			me.setPostion(me.getX(), me.getY() + b);
+    		}
+        }
+            	
            
             private boolean CanIMove(int xPosition, int yPosition) {
                 GameElement entity = x.getLevel().getElement(xPosition, yPosition);
@@ -171,6 +199,10 @@ public class GameElementFactory {
         return x;
     }
    
+	/** Create a crystall ball
+	 * the door is open when all crystall ball are collected by the player
+	 * @return a GameElement
+	 */
     public static GameElement createCrystalBall() {
         GameElement x = new GameElement("crystalBall");
         x.setPermeability(EPermeability.ALLOW_Player);
@@ -183,7 +215,10 @@ public class GameElementFactory {
         });
         return x;
     }
-   
+	/** Create a closed door
+	 * this door allow the player when open to get out the level
+	 * @return a GameElement
+	 */
     public static GameElement createClosedDoor() {
         GameElement x = new GameElement("door",1);
         x.setPermeability(EPermeability.ALLOW_Player);
@@ -203,32 +238,54 @@ public class GameElementFactory {
         return x;
     }
    
+	/** Create a loran
+	 * Lorann is the entity controlled by the player
+	 * @return a GameElement
+	 */
     public static GameElement createLorann() {
         Player x = new Player("lorann");
         return (GameElement) x;
     }
    
+	/** Create an opened door
+	 * this door is just decoration element player can't interact with it
+	 * @return a GameElement
+	 */
     public static GameElement createOpenedDoor() {
         GameElement x = new GameElement("door");
         x.setPermeability(EPermeability.ALLOW_NOBODY);
         return x;
     }
    
+	/** Create a purse
+	 * the purse is the gold bag, the score of the player increase when the player take the bag
+	 * @return a GameElement
+	 */
     public static GameElement createPurse() {
         GameElement x = new GameElement("purse");
         x.setPermeability(EPermeability.ALLOW_Player);
         return x;
     }
    
+	/** Create a vertical bone
+	 * a vertical wall
+	 * @return a GameElement
+	 */
     public static GameElement createVerticalBone() {
         GameElement x = new GameElement("bone", 2);
         return x;
     }
-   
+	/** Create a vertical bone
+	 * an horizontal wall
+	 * @return a GameElement
+	 */
     public static GameElement createHorizontalBone() {
         GameElement x = new GameElement("bone", 1);
         return x;
     }
+	/** Create a bone (default wall)
+	 * @return a GameElement
+	 */
     public static GameElement createBone() {
         GameElement x = new GameElement("bone");
         return x;

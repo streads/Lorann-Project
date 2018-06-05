@@ -8,6 +8,9 @@ import model.ModelFacade;
 
 public class GameElementTest {
 
+	/**
+	 * add an element without state and verify if the tag and the identifier added in the level is the good one
+	 */
 	@Test
 	public void testGameElementString() {
 		GameElement testElement = new GameElement("r");
@@ -16,6 +19,9 @@ public class GameElementTest {
 
 	}
 
+	/**
+	 * add an element with state and verify if the tag and the identifier added in the level is the good one
+	 */
 	@Test
 	public void testGameElementStringInt() {
 		GameElement testElement = new GameElement("r", 1);
@@ -24,6 +30,9 @@ public class GameElementTest {
 
 	}
 
+	/**
+	 * test to add a collider effect on an object
+	 */
 	@Test
 	public void testSetColliderManager() {
 		ModelFacade facade = new ModelFacade();
@@ -51,6 +60,9 @@ public class GameElementTest {
 		assertNull("The element should be killed by 'a'", testElement2.getLevel());
 	}
 
+	/**
+	 * Test to add an effect on tick
+	 */
 	@Test
 	public void testSetTickManager() {
 		ModelFacade facade = new ModelFacade();
@@ -64,16 +76,10 @@ public class GameElementTest {
 				me.setState(me.getState() + 1);
 			}
 			
-			
-		});
-		
+		});		
 		for(int i = 2; i < 10; i++) {
 			testElement.tick();
 			assertEquals(i, testElement.getState());	
 		}
-
-		
-		
 	}
-
 }

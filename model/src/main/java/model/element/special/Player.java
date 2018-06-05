@@ -9,7 +9,6 @@ import model.element.OnCollisionStrategy;
 import model.element.OnTickStrategy;
 
 public class Player extends GameElement {
-	int lastTickAction = 0;
 	private GameElement me = this;
 	private GameElement spell = null;
 	private EUserOrder lastMovement = EUserOrder.NOP;
@@ -298,9 +297,7 @@ public class Player extends GameElement {
 						target.kill();
 					} else if (target.getIdentifier() == "crystalBall") {
 						System.out.println("vie");
-					}
-					System.out.println(mySpell.getIdentifier() + " rencontre un " + target.getIdentifier());
-					
+					}					
 				}
 			});
 			
